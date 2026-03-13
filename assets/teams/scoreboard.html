@@ -1,7 +1,5 @@
-{% extends "base.html" %}
-{% block stylesheets %}
-<link rel="stylesheet" href="{{ url_for('split_scoreboard_assets', path='teams/css/bootstrap-chosen.css') }}"/>
-{% endblock %}
+{% extends "scoreboard.html" %}
+
 {% block content %}
 <div class="jumbotron">
 	<div class="container">
@@ -215,5 +213,9 @@
 	<script defer src="{{ url_for('split_scoreboard_assets', path='teams/js/chosen.jquery.min.js') }}"></script>
 	<script defer src="{{ url_for('split_scoreboard_assets', path='teams/js/scoreboard.js') }}"></script>
 
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('split_scoreboard_assets', path='teams/css/bootstrap-chosen.css') }}"/>
 {% endblock %}
 

@@ -59,6 +59,50 @@ Now, the scoreboard will have two tabs:
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
+## Removal
+
+To completely remove the split scoreboard functionality and revert to the default CTFd scoreboard, follow these steps:
+
+### 1. Remove Plugin Files
+
+First, you need to delete the plugin directory from your CTFd installation.
+
+Navigate to the `plugins` directory inside your main `CTFd` folder and remove the plugin directory:
+```bash
+cd /path/to/your/CTFd/plugins
+rm -rf CTFd_Split_Scoreboard_Plugin
+```
+
+Then, restart your Docker containers for the changes to take effect:
+```bash
+sudo docker compose down
+sudo docker compose up -d
+```
+After restarting, the plugin will be disabled, and CTFd will use its default scoreboard.
+
+### 2. Clear Database Settings (Optional)
+
+To keep your database clean, you can remove the configuration settings that the plugin created.
+
+1.  Find the name of your database container:
+    ```bash
+    sudo docker ps
+    ```
+    Look for the container using the `mariadb` image (e.g., `ctfd-setup-db-1`).
+
+2.  Connect to the database inside the container:
+    ```bash
+    sudo docker exec -it <your-db-container-name> mysql -u ctfd -p
+    ```
+    When prompted, enter the `MYSQL_PASSWORD` from your `docker-compose.yml` file (the default is `ctfd`).
+
+3.  Once you have a `MariaDB [ctfd]>` prompt, run the following SQL command to delete all settings related to this plugin:
+    ```sql
+    DELETE FROM configs WHERE `key` LIKE 'split_scoreboard%';
+    ```
+
+4.  Type `exit` to leave the database shell.
+
 ## License
 
 [Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/)
