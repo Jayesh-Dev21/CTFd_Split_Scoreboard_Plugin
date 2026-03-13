@@ -1,0 +1,62 @@
+<div>
+<form id="admin-ss-form" method="POST">
+	{% set vars = namespace(attr_type="number") %}
+	<input type="hidden" name="id">
+	<div class="form-group">
+		<label for="name">Split Based on:</label>
+		<select class="form-control" id="field-type" name="attr_id">
+			<option value="-1" data-type="number" {% if key|string() == '-1' %}{% set vars.attr_type = "number" %}selected{% endif %}>
+				Team size
+			</option>
+			<option value="-2" data-type="text" {% if key|string() ==  '-2' %}{% set vars.attr_type = "text" %}selected{% endif %}>
+				Team size less than
+			</option>
+			<option value="-3" data-type="text" {% if key|string() == '-3' %}{% set vars.attr_type = "text" %}selected{% endif %}>
+				Team size greater than
+			</option>
+			<option value="-4" data-type="text" {% if key|string() == '-4' %}{% set vars.attr_type = "text" %}selected{% endif %}>
+				Email Domain
+			</option>
+			{% for attr in attributes %}
+				<option value="{{ attr.id }}" data-type="{{ attr.type }}" {% if attr.id == key %}{% set vars.attr_type = attr.type %}selected{% endif %}>
+					{{ attr.name }}
+				</option>
+			{% endfor %}
+		</select>
+	</div>
+	<div class="form-group" id="field-value">
+		<label for="value">Matching Value</label>
+		<input type="text" disabled/>
+	</div>
+	<div class="form-group" id="field-matched-title" >
+		<label for="value">Matching Title</label>
+		<input type="text" value="{{ matched_title }}" name="attr_matched_title"/>
+	</div>
+	<div class="form-group" id="field-unmatched-title">
+		<label for="value">Unmatching Title</label>
+		<input type="text" value="{{ unmatched_title }}"  name="attr_unmatched_title"/>
+	</div>
+	<div class="form-group">
+		<div class="form-check form-check-inline">
+			<input class="form-check-input" type="checkbox" name="custom" id="custom-checkbox"
+				   {% if custom is defined and custom %}checked{% endif %}>
+			<label class="form-check-label" for="custom-checkbox">Allow custom scoreboard</label>
+		</div>
+	</div>
+
+	<div id="results">
+
+	</div>
+	<button id="update-split" type="submit" class="btn btn-primary btn-outlined float-right modal-action">
+		Submit
+	</button>
+</form>
+<script>
+	var attr_value = "{{ value }}";
+	var attr_id = "{{ key }}";
+	var attr_type = "{% if vars.attr_type %}{{ vars.attr_type }}{% endif %}";
+	var attr_matched_title = "{{ matched_title }}";
+	var attr_unmatched_title = "{{ unmatched_title }}";
+</script>
+<script src="{{ url_for('split_scoreboard_assets', path='admin/js/admin_ss_form.js') }}" defer='defer'></script>
+</div>

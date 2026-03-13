@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+	<div class="container">
+		<h1>Split Scoreboard</h1>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+				{% include "admin_ss_form.html" %}
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script defer src="{{ url_for('split_scoreboard_assets', path='admin/js/split_scoreboard_attr.js') }}"></script>
+{% endblock %}
