@@ -28,6 +28,7 @@
 		<label for="value">Matching Value</label>
 		<input type="text" disabled/>
 	</div>
+	{% if key|string() != '-4' %}
 	<div class="form-group" id="field-matched-title" >
 		<label for="value">Matching Title</label>
 		<input type="text" value="{{ matched_title }}" name="attr_matched_title"/>
@@ -36,6 +37,7 @@
 		<label for="value">Unmatching Title</label>
 		<input type="text" value="{{ unmatched_title }}"  name="attr_unmatched_title"/>
 	</div>
+	{% endif %}
 	<div class="form-group">
 		<div class="form-check form-check-inline">
 			<input class="form-check-input" type="checkbox" name="custom" id="custom-checkbox"

@@ -23,16 +23,37 @@ This plugin for CTFd allows splitting the main scoreboard into separate views ba
 
 1.  Navigate to the CTFd Admin Panel.
 2.  Go to **Plugins > Split Scoreboard**.
-3.  From the "Split Based on" dropdown, select the criterion for the split:
-    *   **Team Attributes:** Choose a custom team field. You can create custom fields under **Admin Panel > Config > Custom Fields**.
-    *   **Team Size:** Options to filter by exact, less than, or greater than a specified number.
-    *   **Email Domain:** To filter users by their email address ending (e.g., `gmail.com`).
+3.  From the "Split Based on" dropdown, select the criterion for the split.
 4.  Enter the value to match in the "Matching Value" field.
-5.  Customize the titles for the "Matched" and "Unmatched" scoreboard tabs.
+5.  Customize the titles for the "Matched" and "Unmatched" scoreboard tabs (if applicable).
 6.  Optionally, enable the "Allow custom scoreboard" feature.
 7.  Click **Submit**.
 
 The main scoreboard will now display separate tabs based on your configuration.
+
+### Example: Splitting by Email Domain
+
+Let's say you want to create a separate leaderboard for students from "iitbhu.ac.in" and another for everyone else.
+
+1.  **Split Based on:** Select `Email Domain`.
+2.  **Where value matches:** Enter `iitbhu.ac.in`.
+3.  The "Matching Title" and "Unmatching Title" fields will be hidden as they are not needed for this option. The titles will default to "iitbhu.ac.in" and "Other".
+4.  Click **Submit**.
+
+Now, the scoreboard will have two tabs:
+-   **iitbhu.ac.in:** Shows only participants with an `@iitbhu.ac.in` email address.
+-   **Other:** Shows all other participants.
+
+### Other Split Options
+
+*   **Team Attributes:** Choose a custom team field (e.g., "Country"). You can create custom fields under **Admin Panel > Config > Custom Fields**.
+    *   **Where value matches:** Enter the value you want to match (e.g., "USA").
+    *   **Matching Title:** `USA Teams`
+    *   **Unmatching Title:** `International Teams`
+*   **Team Size:** Options to filter by exact, less than, or greater than a specified number.
+    *   **Where value matches:** Enter the number of members (e.g., `3`).
+    *   **Matching Title:** `Teams of 3`
+    *   **Unmatching Title:** `Other Teams`
 
 ## Contributing
 
