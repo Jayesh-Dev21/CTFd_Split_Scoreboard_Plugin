@@ -70,6 +70,15 @@ function update_value_type(){
 	if( input != undefined)
 		input.off();
 	input_box.empty()
+
+	if (attr_id == -4) {
+		matched_title.hide();
+		unmatched_title.hide();
+	} else {
+		matched_title.show();
+		unmatched_title.show();
+	}
+
 	switch(attr_type.toLowerCase()){
 		case "number":
 			input_box.html('<label for="value">Where value matches:</label><input type="number" class="form-control" name="value" id="value" value="'+attr_value+'"/>');

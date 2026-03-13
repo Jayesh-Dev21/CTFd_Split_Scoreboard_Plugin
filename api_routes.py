@@ -276,19 +276,16 @@ class SplitScoresList(Resource):
 		
 		req = request.get_json()
 		attr = Fields.query.filter_by(id = req['attr_id']).first()
-		if( attr and attr.field_type == 'boolean' ):
-			if( req['value'] ):
-				value = 'true'
-			else:
-				value = 'false'
-		else:
+		if 'value' in req:
 			value = req['value']
+		else:
+			value = ''
 			
 		set_config("split_scoreboard_value", value)
-		set_config("split_scoreboard_attr", req['attr_id'])
-		set_config("split_scoreboard_custom", req['custom'])
-		set_config("split_scoreboard_attr_matched_title", req['attr_matched_title'])
-		set_config("split_scoreboard_attr_unmatched_title", req['attr_unmatched_title'])
+		set_config("split_scoreboard_attr", req.get('attr_id'))
+		set_config("split_scoreboard_custom", req.get('custom'))
+		set_config("split_scoreboard_attr_matched_title", req.get('attr_matched_title'))
+		set_config("split_scoreboard_attr_unmatched_title", req.get('attr_unmatched_title'))
 
 		response = {
             'success':True,
